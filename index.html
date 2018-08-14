@@ -1,0 +1,219 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+        <script src="vue.js"></script>
+    </head>
+    <title>使用vue</title>
+    <body>
+        <div id="app">
+            {{msg}}
+        </div>
+        <br>
+        <div id="app-2">
+            <span v-bind:title="msg2">
+                当鼠标触摸这里时显示当前时间
+            </span>
+        </div>
+        <br>
+        <div id="app-3">
+            <span v-if="look===true">看得见吗</span>
+            <span v-else-if="look===1">看不见我</span>
+            <span v-else="look">输入了一个错误的参数</span>
+        </div>
+<!--循环-->
+        <hr>
+        <div id="app-4">
+            <li v-for="x in todos">
+                {{x.text}}
+            </li>
+            <hr>
+            <li v-for="y in mylist">
+                {{y.text}}
+            </li>
+        </div>
+<!--按钮-->
+        <hr>
+        <div id="app-5">
+            <p>{{message}}</p>
+            <button v-on:click="rmethod">逆转消息</button>
+        </div>
+<!--绑定-->
+        <div id="app-6">
+            <input v-model="message">
+        </div>
+        <hr>
+<!--组件-->
+        <div id="app-7">
+            <ol>
+                <test></test>
+                <test></test>
+                <test></test>
+            </ol>
+
+        </div>
+        <hr>
+<!--组件2-->
+        <div id="app-8">
+               <todo-item 
+                v-for="x in groceryList" 
+                v-bind:todo="x" 
+                v-bind:key="x.id">
+               </todo-item>
+        </div>
+        <hr>
+        <div id="app-9">
+            {{dmsg}}
+        </div>
+        <hr>
+<!--计算属性-->
+        <div id="app-10">
+            原来的字母:{{ormsg}}<br>
+            现在的字母：{{nowmsg}}
+        </div>
+        <hr>
+<!--v-on-->
+        <div id="app-11">
+            <button v-on:click="count">点击加一</button>
+            {{c}}
+            <br>
+            <input type="text" v-model="inputtext">
+        </div>
+        <hr>
+<!--v-if组合应用切换输入框-->
+        <div id="app-12">
+            <div v-if="logintype==='username'">
+                <label>用户姓名：</label>
+                <input type="text" placeholder="请输入姓名" >
+            </div>
+            <div v-else-if="logintype==='phone'">
+                <label>用户电话：</label>
+                <input type="text" placeholder="请输入电话号码" >
+            </div>
+            <div v-else>
+                <label>电子邮箱：</label>
+                <input type="text" placeholder="请输入电子邮箱">
+            </div>
+            <button v-on:click="change">转换登录</button>
+        </div>
+        <hr>
+<!--新一周上手练习-->
+        <div id="app-13">
+            {{addnum}}
+            <br>
+            <button v-on:click="add">添加一个数字</button>
+        </div>
+        <hr>
+<!--列表遍历-->
+        <div id="app-14">
+            <ui v-for="item in list1":key="item.id">
+                <li>
+                    值：{{item.value}}
+                    <br>
+                </li>
+            </ui>
+            <hr>
+            <br>
+            <ul v-for="(v,k,i) in obj">
+                {{k}}:{{v}},索引：{{i}}
+            </ul>
+            <button v-on:click="addarray">添加对象属性</button>
+        </div>
+        <hr>
+<!--计算属性深入了解-->
+        <h3>计算属性</h3>
+        <div id="app-15">
+            {{fullname}}
+        </div>
+        <hr>
+<!--数组排序过滤操作-->
+        <h3>数组过滤排序操作</h3>
+        <div id="app-16">
+            <li v-for="n in evenum">
+                {{n}}
+            </li>
+        </div>
+ <!--数组操作-->
+        <hr>
+        <h3>简单遍历输出1-10</h3>
+        <div id="app-17">
+            <li v-for="x in 10">
+                {{x}}
+            </li>
+        </div>
+        <hr>
+ <!--todolist-->
+        <div id="todolist">
+            <span>
+                输入你要做的事情：
+            </span>
+            <input v-on:keyup.enter="addlist" type="text" v-model="modellist" placeholder="今天要做什么？">
+            <button  v-on:click="addlist" >添加</button>
+            <br>
+            <ul>
+                <li  v-for="item in todos">
+                    {{item.title}}
+                </li>
+            </ul>
+        </div>
+    <!--事件绑定--按键监视-->
+        <hr>
+        <div id="app-18">
+            <h3>多选框</h3>
+            <input type="checkbox"  value="摄影" v-model="state">摄影
+            <input type="checkbox"  value="骑车" v-model="state">骑车
+            <input type="checkbox"  value="喜欢张老师" v-model="state">张老师
+            <br>
+            今天要做的事情：{{state}}
+            <h3>单选框</h3>
+            <input type="radio" value="喜欢" v-model="like">喜欢
+            <input type="radio" value="超级喜欢" v-model="like">超级喜欢
+            <br>
+            今天对张老师的态度是:{{like}}
+            <h3>下拉菜单</h3>
+            <select v-model="select">
+                <option disabled value="">选择</option>
+                <option>一般喜欢</option>
+                <option>很喜欢</option>
+                <option>超级喜欢</option>
+            </select>
+            <br>
+            下拉菜单选的是：{{select}}
+            <!---->
+            <br>
+            <h3>使用遍历输出下拉菜单</h3>
+            <select v-model="select1">
+                    <option disabled value="">生活目标</option>
+                <option v-for="op in options" v-bind:value="op.value">
+                    {{op.text}}
+                </option>
+            </select>
+            <br>
+            这次使用遍历从后台输出选项：{{select1}}
+            <br>
+            <hr>
+        </div>
+<!--组件的使用-->
+        <hr>
+        <h3>组件的使用</h3>
+        <div id="app-19">
+            <button-count></button-count>
+            <button-count></button-count>
+            <button-count></button-count>
+        </div>
+<!--通过事件向父级组件传递消息-->
+<div id="app-20">
+    <div :style="{fontsize:postFontsize+'em'}">
+        <blog-post
+         v-for="x in posts"
+         v-bind:id="x.id" 
+         v-bind:title="x.title" 
+         v-bind:post="x" 
+         v-on:enlarge-text="postFontsize+=0.1">
+        </blog-post>
+    </div>
+</div>
+<!---->
+    </body>
+    <script src="index.js"></script>
+</html>
