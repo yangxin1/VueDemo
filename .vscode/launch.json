@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "使用本地Chrome调试",
-            "file":"${workspaceFolder}/index.html",
+            "file":"${workspaceFolder}/counttime.html",
             //"url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
         }

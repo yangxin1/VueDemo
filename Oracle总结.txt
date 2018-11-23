@@ -1,0 +1,54 @@
+1.使用case when 查询
+select count(*),sum(case when kfxm is null then 1 else 0 end) from  BIZ_EXAM_pro
+--select * from BIZ_EXAM_pro
+where kskm='2'
+使用round进行数据的四舍五入
+round(num,decimal)
+将num 保留decimal位小数四舍五入进行计算
+round(2333.456,2):将233.456取两位小数进行四舍五入计算返回：233.46
+
+2.使用 inner join实现外连接内连接
+！！
+2.考试项目合格率sql查询语句
+--考试项目合格率预警
+select e.kcmc,c.xmmc,trunc(sum(case when p.kfxm is null then 1 else 0 end)/ count(*),4)*100 ksxmhgl 
+from Biz_Exam_Pro p join Biz_Examnation_Site e on p.kcxh=e.xh join BIZ_EXAM_CODE c on p.ksxm=c.xmdm
+where e.glbm='510300000400' and kssj>trunc(sysdate)-1
+group by e.kcmc,c.xmmc
+
+--考试车考试合格率异常预警
+select e.kcmc,kchp,trunc(sum(case when kfxm is null then 1 else 0 end)/count(ksxh),4)*100 KSCHGL 
+from BIZ_EXAM_PRO p join BIZ_EXAMNATION_SITE e on p.kcxh=e.xh
+where e.glbm='510300000400' and kssj>=trunc(sysdate)-1
+group by kchp,e.kcmc
+
+--考试设备合格率异常预警
+select p.kcxh, s.kcmc,p.sbxh,d.ksxmsm,trunc(sum(case when p.kfxm is null then 1 else 0 end)/count(*),4)*100 KSSBHGL
+from 
+BIZ_EXAM_PRO p join Biz_Exam_Device d on p.sbxh=d.xh
+join BIZ_EXAMNATION_SITE s on p.kcxh=s.xh
+where s.glbm='510300000400' and p.kssj>trunc(sysdate)-1
+group by p.kcxh, s.kcmc,p.sbxh,d.ksxmsm
+
+--考台合格率异常预警
+select r.kcxh, e.kcmc,k.ksjh,k.ip,trunc(sum(case when kscj>=90 then 1 else 0 end )/count(*),4)*100 KTHGL
+from Biz_Exam_KTXX k join BIZ_EXAM_RESULT r on k.kcdm=r.kcxh join BIZ_EXAMNATION_SITE e on r.kcxh=e.xh
+where e.glbm='510300000400' and kssj>trunc(sysdate)-1
+group by  r.kcxh, e.kcmc,k.ksjh,k.ip
+order by k.ksjh
+
+
+--考场合格率异常预警
+--使用合格标记2018-7-31     需要重写
+select r.kcxh,e.kcmc,trunc(sum(case when r.kskm='2' or r.kskm='3' and r.kscj>=80 then 1  when r.kskm='1' or r.kskm='4' and r.kscj>=90 then 1 else 0 end )/count(*),4)*100 kchgl
+from BIZ_EXAM_RESULT r join BIZ_EXAMNATION_SITE e on r.kcxh=e.xh
+where e.glbm='510300000400' and kssj>trunc(sysdate)-1
+group by r.kcxh,e.kcmc
+--修改之后的考场预警
+select  r.kcxh,e.kcmc, trunc(sum(case when r.hgbj='1' then 1 else 0 end )/count(*),4)*100 kchgl
+from BIZ_EXAM_RESULT r join BIZ_EXAMNATION_SITE e on r.kcxh=e.xh
+where e.glbm='510300000400' and kssj>trunc(sysdate)-1
+group by r.kcxh,e.kcmc
+
+
+桜 super love (ly summer chan remix)
