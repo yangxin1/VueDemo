@@ -1,6 +1,6 @@
 # element_demo1
 
->2019/5/26 Element UI测试项目，分支为DEV，master分支为一些文档，暂时还没有修改仓库结构
+>2019/5/26 Element UI测试项目，分支为DEV，master分支为一些文档，暂时还没有修改仓库结构，后续会合并分支
 
 ## Build Setup
 
