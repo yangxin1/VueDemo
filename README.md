@@ -1,6 +1,6 @@
 # element_demo1
 
-> mianshi_demo
+>2019/5/26 Element UI测试项目，分支为DEV，master分支为一些文档，暂时还没有修改仓库结构
 
 ## Build Setup
 
